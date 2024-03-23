@@ -74,7 +74,7 @@ class KafkaConsumer():
 
     def __init__(self):
         self.consumers = {}
-        self.err_messages = {}
+        self.err_messages = []
 
     def create_consumer(
         self,
@@ -327,7 +327,13 @@ class KafkaConsumer():
 
     def _decode_data(self, data, decode_format):
         if decode_format:
-            return [record.decode(str(decode_format)) for record in data]
+            for record in data:
+                try:
+                    decoded_data += record.decode(str(decode_format))
+                except:
+                    self.err_messages.append(record)
+            if decoded_data:
+                return [decoded_data]
         return data
 
     # Experimental - getting messages from kafka topic every second
