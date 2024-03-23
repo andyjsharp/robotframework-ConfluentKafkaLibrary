@@ -327,6 +327,7 @@ class KafkaConsumer():
 
     def _decode_data(self, data, decode_format):
         if decode_format:
+            decoded_data = {}
             for record in data:
                 try:
                     decoded_data += record.decode(str(decode_format))
