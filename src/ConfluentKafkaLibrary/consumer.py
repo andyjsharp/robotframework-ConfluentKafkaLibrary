@@ -160,7 +160,7 @@ class KafkaConsumer():
     def get_decode_errors(self):
         """Returns all decode error messages
         """
-        return self.err_messages()
+        return self.err_messages
 
     def create_topic_partition(self, topic_name, partition=None, offset=None):
         """Returns TopicPartiton object based on
