@@ -74,6 +74,7 @@ class KafkaConsumer():
 
     def __init__(self):
         self.consumers = {}
+        self.err_messages = {}
 
     def create_consumer(
         self,
@@ -155,6 +156,11 @@ class KafkaConsumer():
         """Returns all non-threaded consumers
         """
         return self.consumers
+
+    def get_decode_errors(self):
+        """Returns all decode error messages
+        """
+        return self.err_messages()
 
     def create_topic_partition(self, topic_name, partition=None, offset=None):
         """Returns TopicPartiton object based on
